@@ -26,8 +26,74 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    System.out.println("This module will be implemented in the next steps.");
+                    int patientChoice = 0;
+
+                    while (patientChoice != 5) {
+                        System.out.println();
+                        System.out.println("Patient Management");
+                        System.out.println("1. Add Patient");
+                        System.out.println("2. Search Patient");
+                        System.out.println("3. Delete Patient");
+                        System.out.println("4. Display All Patients");
+                        System.out.println("5. Back to Main Menu");
+                        System.out.print("Enter your choice: ");
+
+                        patientChoice = scanner.nextInt();
+
+                        switch (patientChoice) {
+                            case 1:
+                                System.out.print("Enter Patient ID: ");
+                                String patientId = scanner.next();
+                                System.out.print("Enter Name: ");
+                                String name = scanner.next();
+                                System.out.print("Enter Age: ");
+                                int age = scanner.nextInt();
+                                System.out.print("Enter Gender: ");
+                                String gender = scanner.next();
+                                System.out.print("Enter Condition: ");
+                                String condition = scanner.next();
+                                System.out.print("Enter Severity: ");
+                                int severity = scanner.nextInt();
+
+                                Patient patient = new Patient(patientId, name, age, gender, condition, severity);
+                                patientBST.insert(patient);
+                                System.out.println("Patient added successfully.");
+                                break;
+
+                            case 2:
+                                System.out.print("Enter Patient ID to search: ");
+                                String searchId = scanner.next();
+                                Patient foundPatient = patientBST.search(searchId);
+
+                                if (foundPatient != null) {
+                                    System.out.println(foundPatient.toString());
+                                } else {
+                                    System.out.println("Patient not found.");
+                                }
+                                break;
+
+                            case 3:
+                                System.out.print("Enter Patient ID to delete: ");
+                                String deleteId = scanner.next();
+                                patientBST.delete(deleteId);
+                                System.out.println("Patient deletion processed.");
+                                break;
+
+                            case 4:
+                                patientBST.inorderTraversal();
+                                break;
+
+                            case 5:
+                                System.out.println("Returning to the main menu.");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                                break;
+                        }
+                    }
                     break;
+
                 case 2:
                     System.out.println("This module will be implemented in the next steps.");
                     break;
