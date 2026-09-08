@@ -55,4 +55,28 @@ public class EmergencyQueue {
             current = current.getNext();
         }
     }
+
+    public Patient findHighestSeverityPatient() {
+        if (front == null) {
+            return null;
+        }
+
+        EmergencyNode current = front;
+        Patient highestSeverityPatient = current.getPatient();
+        int highestSeverity = current.getPatient().getSeverity();
+
+        while (current != null) {
+            Patient patient = current.getPatient();
+            int severity = patient.getSeverity();
+
+            if (severity > highestSeverity) {
+                highestSeverity = severity;
+                highestSeverityPatient = patient;
+            }
+
+            current = current.getNext();
+        }
+
+        return highestSeverityPatient;
+    }
 }
