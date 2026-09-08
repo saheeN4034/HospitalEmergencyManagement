@@ -95,7 +95,61 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("This module will be implemented in the next steps.");
+                    int emergencyChoice = 0;
+
+                    while (emergencyChoice != 4) {
+                        System.out.println();
+                        System.out.println("Emergency Queue");
+                        System.out.println("1. Add Patient to Emergency Queue");
+                        System.out.println("2. Serve Next Patient");
+                        System.out.println("3. Display Emergency Queue");
+                        System.out.println("4. Back to Main Menu");
+                        System.out.print("Enter your choice: ");
+
+                        emergencyChoice = scanner.nextInt();
+
+                        switch (emergencyChoice) {
+                            case 1:
+                                System.out.print("Enter Patient ID: ");
+                                String emergencyPatientId = scanner.next();
+                                System.out.print("Enter Name: ");
+                                String emergencyName = scanner.next();
+                                System.out.print("Enter Age: ");
+                                int emergencyAge = scanner.nextInt();
+                                System.out.print("Enter Gender: ");
+                                String emergencyGender = scanner.next();
+                                System.out.print("Enter Condition: ");
+                                String emergencyCondition = scanner.next();
+                                System.out.print("Enter Severity: ");
+                                int emergencySeverity = scanner.nextInt();
+
+                                Patient emergencyPatient = new Patient(emergencyPatientId, emergencyName, emergencyAge, emergencyGender, emergencyCondition, emergencySeverity);
+                                emergencyQueue.enqueue(emergencyPatient);
+                                System.out.println("Patient added to the emergency queue.");
+                                break;
+
+                            case 2:
+                                Patient servedPatient = emergencyQueue.dequeue();
+                                if (servedPatient == null) {
+                                    System.out.println("Emergency queue is empty.");
+                                } else {
+                                    System.out.println("Served patient: " + servedPatient.toString());
+                                }
+                                break;
+
+                            case 3:
+                                emergencyQueue.displayQueue();
+                                break;
+
+                            case 4:
+                                System.out.println("Returning to the main menu.");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                                break;
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println("This module will be implemented in the next steps.");
