@@ -15,4 +15,14 @@ public class TreatmentStack {
         newNode.setNext(top);
         top = newNode;
     }
+
+    public Treatment pop() {
+        if (top == null) {
+            return null;
+        }
+
+        Treatment removedTreatment = top.getTreatment();
+        top = top.getNext();
+        return removedTreatment;
+    }
 }
