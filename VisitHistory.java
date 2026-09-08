@@ -39,4 +39,18 @@ public class VisitHistory {
 
         return null;
     }
+
+    public void displayVisits() {
+        if (head == null) {
+            System.out.println("No visit history found.");
+            return;
+        }
+
+        VisitNode current = head;
+
+        while (current != null) {
+            System.out.println(current.getVisit().toString());
+            current = current.getNext();
+        }
+    }
 }
