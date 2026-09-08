@@ -212,7 +212,60 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.println("This module will be implemented in the next steps.");
+                    int visitChoice = 0;
+
+                    while (visitChoice != 4) {
+                        System.out.println();
+                        System.out.println("Visit History");
+                        System.out.println("1. Add Visit");
+                        System.out.println("2. Search Visit");
+                        System.out.println("3. Display All Visits");
+                        System.out.println("4. Back to Main Menu");
+                        System.out.print("Enter your choice: ");
+
+                        visitChoice = scanner.nextInt();
+
+                        switch (visitChoice) {
+                            case 1:
+                                System.out.print("Enter Visit ID: ");
+                                String visitId = scanner.next();
+                                System.out.print("Enter Patient ID: ");
+                                String visitPatientId = scanner.next();
+                                System.out.print("Enter Visit Date: ");
+                                String visitDate = scanner.next();
+                                System.out.print("Enter Reason: ");
+                                String reason = scanner.next();
+
+                                Visit visit = new Visit(visitId, visitPatientId, visitDate, reason);
+                                visitHistory.addVisit(visit);
+                                System.out.println("Visit added to the history.");
+                                break;
+
+                            case 2:
+                                System.out.print("Enter Visit ID to search: ");
+                                String searchVisitId = scanner.next();
+                                Visit foundVisit = visitHistory.searchVisit(searchVisitId);
+
+                                if (foundVisit != null) {
+                                    System.out.println(foundVisit.toString());
+                                } else {
+                                    System.out.println("Visit not found.");
+                                }
+                                break;
+
+                            case 3:
+                                visitHistory.displayVisits();
+                                break;
+
+                            case 4:
+                                System.out.println("Returning to the main menu.");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                                break;
+                        }
+                    }
                     break;
                 case 5:
                     System.out.println("Exiting the system. Goodbye!");
