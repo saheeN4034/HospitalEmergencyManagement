@@ -35,4 +35,24 @@ public class PatientBST {
 
         return current;
     }
+
+    public Patient search(String patientId) {
+        PatientNode current = root;
+
+        while (current != null) {
+            String currentId = current.getPatient().getPatientId();
+
+            if (patientId.compareTo(currentId) == 0) {
+                return current.getPatient();
+            }
+
+            if (patientId.compareTo(currentId) < 0) {
+                current = current.getLeft();
+            } else {
+                current = current.getRight();
+            }
+        }
+
+        return null;
+    }
 }
