@@ -97,13 +97,14 @@ public class Main {
                 case 2:
                     int emergencyChoice = 0;
 
-                    while (emergencyChoice != 4) {
+                    while (emergencyChoice != 5) {
                         System.out.println();
                         System.out.println("Emergency Queue");
                         System.out.println("1. Add Patient to Emergency Queue");
                         System.out.println("2. Serve Next Patient");
-                        System.out.println("3. Display Emergency Queue");
-                        System.out.println("4. Back to Main Menu");
+                        System.out.println("3. Find Highest Severity Patient");
+                        System.out.println("4. Display Emergency Queue");
+                        System.out.println("5. Back to Main Menu");
                         System.out.print("Enter your choice: ");
 
                         emergencyChoice = scanner.nextInt();
@@ -138,15 +139,24 @@ public class Main {
                                 break;
 
                             case 3:
-                                emergencyQueue.displayQueue();
+                                Patient highestSeverityPatient = emergencyQueue.findHighestSeverityPatient();
+                                if (highestSeverityPatient == null) {
+                                    System.out.println("No emergency patients in the queue.");
+                                } else {
+                                    System.out.println("Highest severity patient: " + highestSeverityPatient.toString());
+                                }
                                 break;
 
                             case 4:
+                                emergencyQueue.displayQueue();
+                                break;
+
+                            case 5:
                                 System.out.println("Returning to the main menu.");
                                 break;
 
                             default:
-                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                                System.out.println("Invalid choice. Please enter a number from 1 to 5.");
                                 break;
                         }
                     }
