@@ -25,4 +25,12 @@ public class TreatmentStack {
         top = top.getNext();
         return removedTreatment;
     }
+
+    public Treatment peek() {
+        if (top == null) {
+            return null;
+        }
+
+        return top.getTreatment();
+    }
 }
