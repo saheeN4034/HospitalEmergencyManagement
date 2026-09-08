@@ -26,4 +26,17 @@ public class VisitHistory {
 
         current.setNext(newNode);
     }
+
+    public Visit searchVisit(String visitId) {
+        VisitNode current = head;
+
+        while (current != null) {
+            if (current.getVisit().getVisitId().equals(visitId)) {
+                return current.getVisit();
+            }
+            current = current.getNext();
+        }
+
+        return null;
+    }
 }
