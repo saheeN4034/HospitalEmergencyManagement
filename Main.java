@@ -152,7 +152,64 @@ public class Main {
                     }
                     break;
                 case 3:
-                    System.out.println("This module will be implemented in the next steps.");
+                    int treatmentChoice = 0;
+
+                    while (treatmentChoice != 4) {
+                        System.out.println();
+                        System.out.println("Treatment Stack");
+                        System.out.println("1. Add Treatment");
+                        System.out.println("2. View Latest Treatment");
+                        System.out.println("3. Remove Latest Treatment");
+                        System.out.println("4. Back to Main Menu");
+                        System.out.print("Enter your choice: ");
+
+                        treatmentChoice = scanner.nextInt();
+
+                        switch (treatmentChoice) {
+                            case 1:
+                                System.out.print("Enter Treatment ID: ");
+                                String treatmentId = scanner.next();
+                                System.out.print("Enter Patient ID: ");
+                                String treatmentPatientId = scanner.next();
+                                System.out.print("Enter Treatment Description: ");
+                                String treatmentDescription = scanner.next();
+                                System.out.print("Enter Doctor Name: ");
+                                String doctorName = scanner.next();
+                                System.out.print("Enter Date: ");
+                                String date = scanner.next();
+
+                                Treatment treatment = new Treatment(treatmentId, treatmentPatientId, treatmentDescription, doctorName, date);
+                                treatmentStack.push(treatment);
+                                System.out.println("Treatment added to the stack.");
+                                break;
+
+                            case 2:
+                                Treatment latestTreatment = treatmentStack.peek();
+                                if (latestTreatment == null) {
+                                    System.out.println("No treatments available.");
+                                } else {
+                                    System.out.println(latestTreatment.toString());
+                                }
+                                break;
+
+                            case 3:
+                                Treatment removedTreatment = treatmentStack.pop();
+                                if (removedTreatment == null) {
+                                    System.out.println("No treatments available.");
+                                } else {
+                                    System.out.println("Removed treatment: " + removedTreatment.toString());
+                                }
+                                break;
+
+                            case 4:
+                                System.out.println("Returning to the main menu.");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                                break;
+                        }
+                    }
                     break;
                 case 4:
                     System.out.println("This module will be implemented in the next steps.");
