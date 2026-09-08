@@ -26,11 +26,17 @@ public class TreatmentStack {
         return removedTreatment;
     }
 
-    public Treatment peek() {
+    public void displayTreatments() {
         if (top == null) {
-            return null;
+            System.out.println("No treatment records found.");
+            return;
         }
 
-        return top.getTreatment();
+        TreatmentNode current = top;
+
+        while (current != null) {
+            System.out.println(current.getTreatment().toString());
+            current = current.getNext();
+        }
     }
 }

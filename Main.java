@@ -34,8 +34,8 @@ public class Main {
                         System.out.println("1. Add Patient");
                         System.out.println("2. Search Patient");
                         System.out.println("3. Delete Patient");
-                        System.out.println("4. Display All Patients");
-                        System.out.println("5. Back to Main Menu");
+                        System.out.println("4. Display Patients");
+                        System.out.println("5. Back");
                         System.out.print("Enter your choice: ");
 
                         patientChoice = scanner.nextInt();
@@ -48,14 +48,12 @@ public class Main {
                                 String name = scanner.next();
                                 System.out.print("Enter Age: ");
                                 int age = scanner.nextInt();
-                                System.out.print("Enter Gender: ");
-                                String gender = scanner.next();
-                                System.out.print("Enter Condition: ");
-                                String condition = scanner.next();
-                                System.out.print("Enter Severity: ");
-                                int severity = scanner.nextInt();
+                                System.out.print("Enter Contact Number: ");
+                                String contactNumber = scanner.next();
+                                System.out.print("Enter Medical Condition: ");
+                                String medicalCondition = scanner.next();
 
-                                Patient patient = new Patient(patientId, name, age, gender, condition, severity);
+                                Patient patient = new Patient(patientId, name, age, contactNumber, medicalCondition);
                                 patientBST.insert(patient);
                                 System.out.println("Patient added successfully.");
                                 break;
@@ -64,7 +62,6 @@ public class Main {
                                 System.out.print("Enter Patient ID to search: ");
                                 String searchId = scanner.next();
                                 Patient foundPatient = patientBST.search(searchId);
-
                                 if (foundPatient != null) {
                                     System.out.println(foundPatient.toString());
                                 } else {
@@ -76,7 +73,6 @@ public class Main {
                                 System.out.print("Enter Patient ID to delete: ");
                                 String deleteId = scanner.next();
                                 patientBST.delete(deleteId);
-                                System.out.println("Patient deletion processed.");
                                 break;
 
                             case 4:
@@ -97,14 +93,13 @@ public class Main {
                 case 2:
                     int emergencyChoice = 0;
 
-                    while (emergencyChoice != 5) {
+                    while (emergencyChoice != 4) {
                         System.out.println();
                         System.out.println("Emergency Queue");
-                        System.out.println("1. Add Patient to Emergency Queue");
-                        System.out.println("2. Serve Next Patient");
-                        System.out.println("3. Find Highest Severity Patient");
-                        System.out.println("4. Display Emergency Queue");
-                        System.out.println("5. Back to Main Menu");
+                        System.out.println("1. Enqueue Patient");
+                        System.out.println("2. Dequeue Patient");
+                        System.out.println("3. Display Waiting Patients");
+                        System.out.println("4. Back");
                         System.out.print("Enter your choice: ");
 
                         emergencyChoice = scanner.nextInt();
@@ -117,14 +112,12 @@ public class Main {
                                 String emergencyName = scanner.next();
                                 System.out.print("Enter Age: ");
                                 int emergencyAge = scanner.nextInt();
-                                System.out.print("Enter Gender: ");
-                                String emergencyGender = scanner.next();
-                                System.out.print("Enter Condition: ");
+                                System.out.print("Enter Contact Number: ");
+                                String emergencyContact = scanner.next();
+                                System.out.print("Enter Medical Condition: ");
                                 String emergencyCondition = scanner.next();
-                                System.out.print("Enter Severity: ");
-                                int emergencySeverity = scanner.nextInt();
 
-                                Patient emergencyPatient = new Patient(emergencyPatientId, emergencyName, emergencyAge, emergencyGender, emergencyCondition, emergencySeverity);
+                                Patient emergencyPatient = new Patient(emergencyPatientId, emergencyName, emergencyAge, emergencyContact, emergencyCondition);
                                 emergencyQueue.enqueue(emergencyPatient);
                                 System.out.println("Patient added to the emergency queue.");
                                 break;
@@ -139,38 +132,30 @@ public class Main {
                                 break;
 
                             case 3:
-                                Patient highestSeverityPatient = emergencyQueue.findHighestSeverityPatient();
-                                if (highestSeverityPatient == null) {
-                                    System.out.println("No emergency patients in the queue.");
-                                } else {
-                                    System.out.println("Highest severity patient: " + highestSeverityPatient.toString());
-                                }
-                                break;
-
-                            case 4:
                                 emergencyQueue.displayQueue();
                                 break;
 
-                            case 5:
+                            case 4:
                                 System.out.println("Returning to the main menu.");
                                 break;
 
                             default:
-                                System.out.println("Invalid choice. Please enter a number from 1 to 5.");
+                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
                                 break;
                         }
                     }
                     break;
+
                 case 3:
                     int treatmentChoice = 0;
 
                     while (treatmentChoice != 4) {
                         System.out.println();
                         System.out.println("Treatment Stack");
-                        System.out.println("1. Add Treatment");
-                        System.out.println("2. View Latest Treatment");
-                        System.out.println("3. Remove Latest Treatment");
-                        System.out.println("4. Back to Main Menu");
+                        System.out.println("1. Push Treatment");
+                        System.out.println("2. Pop Treatment");
+                        System.out.println("3. Display Treatment History");
+                        System.out.println("4. Back");
                         System.out.print("Enter your choice: ");
 
                         treatmentChoice = scanner.nextInt();
@@ -190,25 +175,20 @@ public class Main {
 
                                 Treatment treatment = new Treatment(treatmentId, treatmentPatientId, treatmentDescription, doctorName, date);
                                 treatmentStack.push(treatment);
-                                System.out.println("Treatment added to the stack.");
+                                System.out.println("Treatment pushed to the stack.");
                                 break;
 
                             case 2:
-                                Treatment latestTreatment = treatmentStack.peek();
-                                if (latestTreatment == null) {
-                                    System.out.println("No treatments available.");
-                                } else {
-                                    System.out.println(latestTreatment.toString());
-                                }
-                                break;
-
-                            case 3:
                                 Treatment removedTreatment = treatmentStack.pop();
                                 if (removedTreatment == null) {
                                     System.out.println("No treatments available.");
                                 } else {
                                     System.out.println("Removed treatment: " + removedTreatment.toString());
                                 }
+                                break;
+
+                            case 3:
+                                treatmentStack.displayTreatments();
                                 break;
 
                             case 4:
@@ -221,16 +201,18 @@ public class Main {
                         }
                     }
                     break;
+
                 case 4:
                     int visitChoice = 0;
 
-                    while (visitChoice != 4) {
+                    while (visitChoice != 5) {
                         System.out.println();
                         System.out.println("Visit History");
                         System.out.println("1. Add Visit");
-                        System.out.println("2. Search Visit");
-                        System.out.println("3. Display All Visits");
-                        System.out.println("4. Back to Main Menu");
+                        System.out.println("2. Remove Visit");
+                        System.out.println("3. Search Visit");
+                        System.out.println("4. Display Visit History");
+                        System.out.println("5. Back");
                         System.out.print("Enter your choice: ");
 
                         visitChoice = scanner.nextInt();
@@ -243,19 +225,28 @@ public class Main {
                                 String visitPatientId = scanner.next();
                                 System.out.print("Enter Visit Date: ");
                                 String visitDate = scanner.next();
-                                System.out.print("Enter Reason: ");
-                                String reason = scanner.next();
+                                System.out.print("Enter Doctor Name: ");
+                                String doctorName = scanner.next();
+                                System.out.print("Enter Diagnosis: ");
+                                String diagnosis = scanner.next();
+                                System.out.print("Enter Treatment: ");
+                                String treatmentDetail = scanner.next();
 
-                                Visit visit = new Visit(visitId, visitPatientId, visitDate, reason);
+                                Visit visit = new Visit(visitId, visitPatientId, visitDate, doctorName, diagnosis, treatmentDetail);
                                 visitHistory.addVisit(visit);
                                 System.out.println("Visit added to the history.");
                                 break;
 
                             case 2:
+                                System.out.print("Enter Visit ID to remove: ");
+                                String removeVisitId = scanner.next();
+                                visitHistory.removeVisit(removeVisitId);
+                                break;
+
+                            case 3:
                                 System.out.print("Enter Visit ID to search: ");
                                 String searchVisitId = scanner.next();
                                 Visit foundVisit = visitHistory.searchVisit(searchVisitId);
-
                                 if (foundVisit != null) {
                                     System.out.println(foundVisit.toString());
                                 } else {
@@ -263,23 +254,25 @@ public class Main {
                                 }
                                 break;
 
-                            case 3:
+                            case 4:
                                 visitHistory.displayVisits();
                                 break;
 
-                            case 4:
+                            case 5:
                                 System.out.println("Returning to the main menu.");
                                 break;
 
                             default:
-                                System.out.println("Invalid choice. Please enter a number from 1 to 4.");
+                                System.out.println("Invalid choice. Please enter a number from 1 to 5.");
                                 break;
                         }
                     }
                     break;
+
                 case 5:
                     System.out.println("Exiting the system. Goodbye!");
                     break;
+
                 default:
                     System.out.println("Invalid choice. Please enter a number from 1 to 5.");
                     break;

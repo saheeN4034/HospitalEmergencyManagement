@@ -2,13 +2,17 @@ public class Visit {
     private String visitId;
     private String patientId;
     private String visitDate;
-    private String reason;
+    private String doctorName;
+    private String diagnosis;
+    private String treatment;
 
-    public Visit(String visitId, String patientId, String visitDate, String reason) {
+    public Visit(String visitId, String patientId, String visitDate, String doctorName, String diagnosis, String treatment) {
         this.visitId = visitId;
         this.patientId = patientId;
         this.visitDate = visitDate;
-        this.reason = reason;
+        this.doctorName = doctorName;
+        this.diagnosis = diagnosis;
+        this.treatment = treatment;
     }
 
     public String getVisitId() {
@@ -35,12 +39,28 @@ public class Visit {
         this.visitDate = visitDate;
     }
 
-    public String getReason() {
-        return reason;
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 
     @Override
@@ -49,7 +69,9 @@ public class Visit {
                 "visitId='" + visitId + '\'' +
                 ", patientId='" + patientId + '\'' +
                 ", visitDate='" + visitDate + '\'' +
-                ", reason='" + reason + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", treatment='" + treatment + '\'' +
                 '}';
     }
 }
